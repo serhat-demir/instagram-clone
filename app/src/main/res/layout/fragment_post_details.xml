@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.serhat.instagram.localdb.Session" />
+
+        <variable name="postDetailsFragment"
+            type="com.serhat.instagram.ui.view.fragment.PostDetailsFragment" />
+
+        <variable name="post"
+            type="com.serhat.instagram.data.model.Post" />
+
+        <variable name="commentAdapter"
+            type="com.serhat.instagram.ui.view.adapter.CommentAdapter" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/frgPostDetailsSwipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.view.fragment.PostDetailsFragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/frgPostDetailsImgUserPhoto"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:onClick="@{() -> postDetailsFragment.navToPostOwnersProfile(frgPostDetailsImgUserPhoto, post.post_owner.user_id)}"
+                            android:padding="2dp"
+                            android:scaleType="fitXY"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImageView"
+                            app:strokeColor="@color/black"
+                            app:strokeWidth="2dp"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/frgPostDetailsImgPopupMenu"
+                            app:layout_constraintStart_toEndOf="@+id/frgPostDetailsImgUserPhoto"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5">
+
+                            <TextView
+                                android:id="@+id/frgPostDetailsLblUserName"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{() -> postDetailsFragment.navToPostOwnersProfile(frgPostDetailsImgUserPhoto, post.post_owner.user_id)}"
+                                android:text="@{post.post_owner.user_name}" />
+
+                            <TextView
+                                android:id="@+id/frgPostDetailsLblPostDate"
+                                android:textSize="15sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{post.created_at}" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/frgPostDetailsImgPopupMenu"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:onClick="@{() -> postDetailsFragment.openPopup(frgPostDetailsImgPopupMenu, post)}"
+                            android:visibility="@{(Session.ACTIVE_USER.user_id == post.post_owner.user_id) ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5"
+                            app:srcCompat="@drawable/ic_popup_menu" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ImageView
+                        android:id="@+id/frgPostDetailsImgPostImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxHeight="600dp"
+                        android:scaleType="fitXY"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="8dp"
+                        android:paddingTop="8dp">
+
+                        <ImageView
+                            android:id="@+id/frgPostDetailsImgLike"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:onClick="@{() -> (postDetailsFragment.isPostLiked(post)) ? postDetailsFragment.unlikePost(post.post_id) : postDetailsFragment.likePost(post.post_id)}"
+                            android:src="@drawable/ic_like"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5" />
+
+                        <ImageView
+                            android:id="@+id/frgPostDetailsImgSave"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:onClick="@{() -> (postDetailsFragment.isPostSaved(post)) ? postDetailsFragment.unsavePost(post.post_id) : postDetailsFragment.savePost(post)}"
+                            android:src="@drawable/ic_save"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.931" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="8dp">
+
+                        <TextView
+                            android:id="@+id/frgPostDetailsLblPostLikes"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/card_post_likes(post.likers.size())}" />
+
+                        <TextView
+                            android:id="@+id/frgPostDetailsLblPostDescription"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text='@{post.post_owner.user_name + " " + post.post_description}' />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        app:boxCornerRadiusBottomEnd="0dp"
+                        app:boxCornerRadiusBottomStart="0dp"
+                        app:boxCornerRadiusTopEnd="0dp"
+                        app:boxCornerRadiusTopStart="0dp"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/frgPostDetailsFabAddComment"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/frgPostDetailsTxtComment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/fragment_post_details_ph_add_a_comment"
+                            android:inputType="text"
+                            android:maxLength="250"
+                            android:maxLines="1"
+                            android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/frgPostDetailsFabAddComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/md_blue_400"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() -> postDetailsFragment.shareComment(frgPostDetailsTxtComment.getText().toString().trim(), post.post_id)}"
+                        app:elevation="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5"
+                        app:srcCompat="@drawable/ic_send"
+                        app:tint="@color/white"
+                        tools:ignore="ContentDescription" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="@{(post.comments.size() == 0) ? View.GONE : View.VISIBLE}"
+                    android:background="@color/gray" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/frgPostDetailsRecyclerView"
+                    android:adapter="@{commentAdapter}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

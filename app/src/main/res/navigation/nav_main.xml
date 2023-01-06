@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/feedFragment">
+
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.FeedFragment"
+        android:label="FeedFragment" >
+        <action
+            android:id="@+id/feedToProfile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/feedToPostDetails"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/searchToProfile"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPostFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.NewPostFragment"
+        android:label="NewPostFragment" >
+        <action
+            android:id="@+id/newPostToFeed"
+            app:destination="@id/feedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.NotificationsFragment"
+        android:label="NotificationsFragment" >
+        <action
+            android:id="@+id/notificationsToProfile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/notificationsToPostDetails"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.ProfileFragment"
+        android:label="ProfileFragment" >
+        <argument
+            android:name="user_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/profileToFollow"
+            app:destination="@id/followFragment" />
+        <action
+            android:id="@+id/profileToPostDetails"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/settingsToProfile"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedPostsFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.SavedPostsFragment"
+        android:label="SavedPostsFragment" >
+        <action
+            android:id="@+id/savedPostsToProfile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/savedPostsToPostDetails"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/followFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.FollowFragment"
+        android:label="FollowFragment" >
+        <action
+            android:id="@+id/followToProfile"
+            app:destination="@id/profileFragment" />
+        <argument
+            android:name="users"
+            app:argType="com.serhat.instagram.data.model.User[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.PostDetailsFragment"
+        android:label="PostDetailsFragment" >
+        <argument
+            android:name="post_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/postDetailsToProfile"
+            app:destination="@id/profileFragment" />
+    </fragment>
+</navigation>

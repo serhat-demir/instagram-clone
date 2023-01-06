@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_sign_in"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/signInToSignUp"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.serhat.instagram.ui.view.fragment.SignUpFragment"
+        android:label="SignUpFragment" />
+</navigation>

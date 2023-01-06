@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable name="newPostFragment"
+            type="com.serhat.instagram.ui.view.fragment.NewPostFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".ui.view.fragment.NewPostFragment">
+
+            <TextView
+                android:id="@+id/frgNewPostLblTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/fragment_new_post_title"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/frgNewPostImgSelectPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="28dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/select_image_border"
+                android:maxHeight="600dp"
+                android:onClick="@{() -> newPostFragment.selectImage()}"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_image" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frgNewPostTxtPostDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_new_post_ph_post_description"
+                    android:inputType="text"
+                    android:maxLength="200"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/frgNewPostBtnShare"
+                style="@style/ButtonBlueLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> newPostFragment.sharePost(frgNewPostTxtPostDescription.getText().toString().trim())}"
+                android:text="@string/fragment_new_post_title" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

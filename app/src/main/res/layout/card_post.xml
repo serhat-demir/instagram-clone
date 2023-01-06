@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.serhat.instagram.localdb.Session" />
+
+        <variable name="postAdapterFeed"
+            type="com.serhat.instagram.ui.view.adapter.PostAdapterFeed" />
+
+        <variable name="postAdapterSaved"
+            type="com.serhat.instagram.ui.view.adapter.PostAdapterSaved" />
+
+        <variable name="post"
+            type="com.serhat.instagram.data.model.Post" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/cardPostImgUserPhoto"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:onClick="@{() -> (postAdapterFeed != null) ? postAdapterFeed.navToPostOwnersProfile(cardPostImgUserPhoto, post.post_owner.user_id) : postAdapterSaved.navToPostOwnersProfile(cardPostImgUserPhoto, post.post_owner.user_id)}"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImageView"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardPostImgPopupMenu"
+                app:layout_constraintStart_toEndOf="@+id/cardPostImgUserPhoto"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <TextView
+                    android:id="@+id/cardPostLblUserName"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:onClick="@{() -> (postAdapterFeed != null) ? postAdapterFeed.navToPostOwnersProfile(cardPostImgUserPhoto, post.post_owner.user_id) : postAdapterSaved.navToPostOwnersProfile(cardPostImgUserPhoto, post.post_owner.user_id)}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{post.post_owner.user_name}" />
+
+                <TextView
+                    android:id="@+id/cardPostLblPostDate"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{post.created_at}" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/cardPostImgPopupMenu"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:visibility="@{(Session.ACTIVE_USER.user_id == post.post_owner.user_id) ? View.VISIBLE : View.GONE}"
+                android:onClick="@{() -> (postAdapterFeed != null) ? postAdapterFeed.openPopup(cardPostImgPopupMenu, post) : postAdapterSaved.openPopup(cardPostImgPopupMenu, post)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_popup_menu" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/cardPostImgPostImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="600dp"
+            android:scaleType="fitXY"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:id="@+id/cardPostImgLike"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{(postAdapterFeed != null) ? ((postAdapterFeed.isPostLiked(post)) ? @drawable/ic_liked : @drawable/ic_like) : ((postAdapterSaved.isPostLiked(post)) ? @drawable/ic_liked : @drawable/ic_like)}"
+                android:onClick="@{() -> (postAdapterFeed != null) ? ((postAdapterFeed.isPostLiked(post)) ? postAdapterFeed.unlikePost(post.post_id) : postAdapterFeed.likePost(post.post_id)) : ((postAdapterSaved.isPostLiked(post)) ? postAdapterSaved.unlikePost(post.post_id) : postAdapterSaved.likePost(post.post_id))}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <ImageView
+                android:id="@+id/cardPostImgComments"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_comment"
+                android:onClick="@{() -> (postAdapterFeed != null) ? postAdapterFeed.navToPostDetails(cardPostImgComments, post.post_id) : postAdapterSaved.navToPostDetails(cardPostImgComments, post.post_id)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardPostImgLike"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <ImageView
+                android:id="@+id/cardPostImgSave"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{(postAdapterFeed != null) ? (postAdapterFeed.isPostSaved(post) ? @drawable/ic_saved : @drawable/ic_save) : @drawable/ic_saved}"
+                android:onClick="@{() -> (postAdapterFeed != null) ? (postAdapterFeed.isPostSaved(post) ? postAdapterFeed.unsavePost(post.post_id) : postAdapterFeed.savePost(post.post_id)) : (postAdapterSaved.unsavePost(post.post_id))}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.931" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cardPostLblPostLikes"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{@string/card_post_likes(post.likers.size())}" />
+
+            <TextView
+                android:id="@+id/cardPostLblPostDescription"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{post.post_owner.user_name + " " + post.post_description}' />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.serhat.instagram.localdb.Session" />
+
+        <variable name="commentAdapter"
+            type="com.serhat.instagram.ui.view.adapter.CommentAdapter" />
+
+        <variable name="comment"
+            type="com.serhat.instagram.data.model.Comment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cardCommentImgUserPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:onClick="@{() -> commentAdapter.navToCommentOwnersProfile(cardCommentImgUserPhoto, comment.comment_owner.user_id)}"
+            android:padding="2dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImageView"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cardCommentImgPopupMenu"
+            app:layout_constraintStart_toEndOf="@+id/cardCommentImgUserPhoto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
+
+            <TextView
+                android:id="@+id/cardCommentLblUserName"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{comment.comment_owner.user_name}' />
+
+            <TextView
+                android:id="@+id/cardCommentLblCommentDate"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{comment.created_at}' />
+
+            <TextView
+                android:id="@+id/cardCommentLblCommentText"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{comment.comment_text}" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cardCommentImgPopupMenu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:onClick="@{() -> commentAdapter.openPopup(cardCommentImgPopupMenu, comment)}"
+            android:visibility="@{(comment.comment_owner.user_id == Session.ACTIVE_USER.user_id) ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/ic_popup_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

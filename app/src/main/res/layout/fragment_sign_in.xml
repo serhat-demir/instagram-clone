@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="signInFragment"
+            type="com.serhat.instagram.ui.view.fragment.SignInFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.view.fragment.SignInFragment">
+
+        <TextView
+            android:id="@+id/frgSignInTitle"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="64dp"
+            app:hintTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frgSignInTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frgSignInTxtUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:inputType="text"
+                android:maxLines="1"
+                android:maxLength="25"
+                android:hint="@string/fragment_sign_in_ph_user_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            app:hintTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frgSignInTxtUserPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:hint="@string/fragment_sign_in_ph_user_password"
+                android:maxLines="1"
+                android:maxLength="50"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/frgSignInLblForgotPassword"
+            android:textColor="@color/md_blue_400"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/fragment_sign_in_lbl_forgot_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+        <Button
+            android:id="@+id/frgSignInBtnSignIn"
+            style="@style/ButtonBlueLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/fragment_sign_in_btn_sign_in"
+            android:onClick="@{() -> signInFragment.signIn(frgSignInTxtUserName.getText().toString().trim(), frgSignInTxtUserPassword.getText().toString())}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frgSignInLblForgotPassword" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/frgSignInLblDontHaveAnAccount"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/fragment_sign_in_lbl_dont_have_an_account" />
+
+            <TextView
+                android:id="@+id/frgSignInLblNavToSignUp"
+                android:textColor="@color/md_blue_400"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> signInFragment.navToSignUp()}"
+                android:text="@string/fragment_sign_in_lbl_sign_up" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

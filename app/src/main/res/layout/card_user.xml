@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.serhat.instagram.localdb.Session"/>
+
+        <variable name="userAdapterFollow"
+            type="com.serhat.instagram.ui.view.adapter.UserAdapterFollow" />
+
+        <variable name="userAdapterSearch"
+            type="com.serhat.instagram.ui.view.adapter.UserAdapterSearch" />
+
+        <variable name="user"
+            type="com.serhat.instagram.data.model.User" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="5"
+        android:padding="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cardUserImgUserPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:onClick="@{() -> (userAdapterFollow != null) ? userAdapterFollow.navToUserProfile(cardUserImgUserPhoto, user.user_id) : userAdapterSearch.navToUserProfile(cardUserImgUserPhoto, user.user_id)}"
+            android:padding="2dp"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImageView"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/cardUserTxtUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_marginHorizontal="8dp"
+            android:text="@{user.user_name}"
+            android:onClick="@{() -> (userAdapterFollow != null) ? userAdapterFollow.navToUserProfile(cardUserImgUserPhoto, user.user_id) : userAdapterSearch.navToUserProfile(cardUserImgUserPhoto, user.user_id)}"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cardUserBtnFollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{() -> Session.followingListContains(user.user_id) ? userAdapterFollow.unfollow(user.user_id) : userAdapterFollow.follow(user)}"
+            android:visibility="@{(user.user_id == Session.ACTIVE_USER.user_id || userAdapterFollow == null) ? View.GONE : View.VISIBLE}"
+            android:text="@{Session.followingListContains(user.user_id) ? @string/btn_following : @string/btn_follow}"
+            android:backgroundTint="@{Session.followingListContains(user.user_id) ? @color/md_blue_800 : @color/md_blue_400}"
+            style="@style/CardUserBtnFollow" />
+    </LinearLayout>
+</layout>

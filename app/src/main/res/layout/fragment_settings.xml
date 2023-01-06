@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.serhat.instagram.localdb.Session" />
+
+        <variable name="settingsFragment"
+            type="com.serhat.instagram.ui.view.fragment.SettingsFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.view.fragment.SettingsFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/frgSettingsLblTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_settings_title"
+                    android:textStyle="bold"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/frgSettingsImgProfilePhoto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:adjustViewBounds="true"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frgSettingsLblTitle"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImageView"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="2dp"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <Button
+                    android:id="@+id/frgSettingsBtnSelectPhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_settings_btn_select_photo"
+                    android:layout_marginStart="16dp"
+                    android:onClick="@{() -> settingsFragment.selectImage()}"
+                    style="@style/ButtonBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/frgSettingsImgProfilePhoto"
+                    app:layout_constraintTop_toTopOf="@+id/frgSettingsImgProfilePhoto" />
+
+                <Button
+                    android:id="@+id/frgSettingsBtnUpdatePhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_settings_btn_update_photo"
+                    android:layout_marginTop="8dp"
+                    android:onClick="@{() -> settingsFragment.changeProfilePhoto()}"
+                    style="@style/ButtonBlue"
+                    app:layout_constraintBottom_toBottomOf="@+id/frgSettingsImgProfilePhoto"
+                    app:layout_constraintEnd_toEndOf="@+id/frgSettingsBtnSelectPhoto"
+                    app:layout_constraintStart_toStartOf="@+id/frgSettingsBtnSelectPhoto"
+                    app:layout_constraintTop_toBottomOf="@+id/frgSettingsBtnSelectPhoto" />
+
+                <TextView
+                    android:id="@+id/frgSettingsLblRemovePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/md_red_400"
+                    android:text="@string/fragment_settings_lbl_remove_photo"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:onClick="@{() -> settingsFragment.removeProfilePhoto(frgSettingsLblRemovePhoto)}"
+                    app:layout_constraintEnd_toEndOf="@+id/frgSettingsImgProfilePhoto"
+                    app:layout_constraintStart_toStartOf="@+id/frgSettingsImgProfilePhoto"
+                    app:layout_constraintTop_toBottomOf="@+id/frgSettingsImgProfilePhoto" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frgSettingsTxtUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_settings_ph_user_email"
+                    android:text="@{Session.ACTIVE_USER.user_email}"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frgSettingsTxtUserPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_settings_ph_user_password"
+                    android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frgSettingsTxtUserFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_settings_ph_user_fullname"
+                    android:text="@{Session.ACTIVE_USER.user_fullname}"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frgSettingsTxtUserBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_settings_ph_user_bio"
+                    android:text="@{Session.ACTIVE_USER.user_bio}"
+                    android:inputType="text"
+                    android:maxLength="250"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/frgSettingsCbUserProfilePrivate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:checked="@{(Session.ACTIVE_USER.user_profile_private == 1) ? true : false}"
+                android:text="@string/fragment_settings_cb_private_account"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/frgSettingsBtnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_settings_btn_save"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:onClick="@{() -> settingsFragment.updateUser(frgSettingsTxtUserEmail.getText().toString().trim(), frgSettingsTxtUserPassword.getText().toString(), frgSettingsTxtUserFullName.getText().toString().trim(), frgSettingsTxtUserBio.getText().toString().trim(), (frgSettingsCbUserProfilePrivate.isChecked() ? 1 : 0))}"
+                style="@style/ButtonBlue" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

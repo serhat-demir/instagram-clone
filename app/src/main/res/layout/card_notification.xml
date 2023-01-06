@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="notificationAdapter"
+            type="com.serhat.instagram.ui.view.adapter.NotificationAdapter" />
+
+        <variable name="notification"
+            type="com.serhat.instagram.data.model.Notification" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/cardNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:onClick="@{() -> notificationAdapter.navToResource(cardNotification, notification)}"
+        android:background="@{(notification.is_seen == 1) ? @color/white : @color/gray}"
+        android:padding="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cardNotificationImgNotificationPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:padding="2dp"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.CircleImageView"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cardNotificationLblNotificationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{notification.notification_text}"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cardNotificationLblNotificationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{notification.received_at}"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

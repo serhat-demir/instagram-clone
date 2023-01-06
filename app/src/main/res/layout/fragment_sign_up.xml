@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="signUpFragment"
+            type="com.serhat.instagram.ui.view.fragment.SignUpFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.view.fragment.SignUpFragment">
+
+        <TextView
+            android:id="@+id/frgSignUpTitle"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:layout_marginHorizontal="32dp"
+            app:hintTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frgSignUpTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frgSignUpTxtUserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:maxLength="50"
+                android:hint="@string/fragment_sign_up_ph_user_email"
+                android:textCursorDrawable="@null" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="32dp"
+            app:hintTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frgSignUpTxtUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:maxLength="25"
+                android:hint="@string/fragment_sign_up_ph_user_name"
+                android:textCursorDrawable="@null" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            app:hintTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frgSignUpTxtUserPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:maxLines="1"
+                android:maxLength="50"
+                android:hint="@string/fragment_sign_up_ph_user_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/frgSignUpBtnSignUp"
+            style="@style/ButtonBlueLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="32dp"
+            android:text="@string/fragment_sign_up_btn_sign_up"
+            android:onClick="@{() -> signUpFragment.signUp(frgSignUpTxtUserEmail.getText().toString().trim(), frgSignUpTxtUserName.getText().toString().trim(), frgSignUpTxtUserPassword.getText().toString())}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/frgSignUpLblHaveAnAccount"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/fragment_sign_up_lbl_have_an_account" />
+
+            <TextView
+                android:id="@+id/frgSignUpLblNavToSignIn"
+                android:textColor="@color/md_blue_400"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:onClick="@{() -> signUpFragment.navToSignIn()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_sign_up_lbl_sign_in" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

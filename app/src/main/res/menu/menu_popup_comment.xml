@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/actionEditComment"
+        android:title="@string/menu_popup_comment_lbl_edit" />
+    <item
+        android:id="@+id/actionDeleteComment"
+        android:title="@string/menu_popup_comment_lbl_delete" />
+</menu>

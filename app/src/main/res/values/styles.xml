@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- global -->
+    <style name="MessageText" parent=""> <!-- for empty recyclerviews -->
+        <item name="android:textSize">22sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- card user -->
+    <style name="CardUserBtnFollow" parent="ButtonBlue">
+        <!-- default visibility: gone -> follow & unfollow methods are disabled in user search page -->
+        <!-- so make this button visible in just follow fragment -->
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- buttons -->
+    <style name="Button" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="shapeAppearanceOverlay">@style/roundedCorners</item>
+    </style>
+
+    <style name="ButtonBlue" parent="Button">
+        <item name="android:backgroundTint">@color/md_blue_400</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonLarge" parent="Button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="ButtonBlueLarge" parent="ButtonLarge">
+        <item name="android:backgroundTint">@color/md_blue_400</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="roundedCorners">
+        <item name="cornerSize">12%</item>
+    </style>
+
+    <!-- Circle Image for Profile Photos -->
+    <style name="ShapeAppearance.App.CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>
