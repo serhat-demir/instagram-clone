@@ -3,12 +3,12 @@ Instagram clone app for android
 
 # Content
 - Features
+- Screenshots
 - Installation
 - Implementations
 - Permissions
 - Api Docs
 - Database Design
-- Screenshots
 
 # Features
 - MVVM
@@ -17,6 +17,13 @@ Instagram clone app for android
 - Shared Preferences
 - Retrofit
 - Rest Api (PHP-MySQL)
+
+# Screenshots
+![img1](https://img001.prntscr.com/file/img001/wT4tZK8-QBCzDvPATL8zjQ.jpg "img1")
+
+![img2](https://img001.prntscr.com/file/img001/h14QUkAUSyuNyg0qdx8tzA.jpg "img2")
+
+![img3](https://img001.prntscr.com/file/img001/DwogW2vLT_if0RQH8nTcOg.jpg "img3")
 
 # Installation
 Installation steps:
@@ -176,10 +183,3 @@ You can change auth user and password,<br/>
 | follow | after | insert | send notification |
 | post_likes | after | insert | send notification |
 | comments | after | insert | send notification |
-
-# Screenshots
-![img1](https://img001.prntscr.com/file/img001/wT4tZK8-QBCzDvPATL8zjQ.jpg "img1")
-
-![img2](https://img001.prntscr.com/file/img001/h14QUkAUSyuNyg0qdx8tzA.jpg "img2")
-
-![img3](https://img001.prntscr.com/file/img001/DwogW2vLT_if0RQH8nTcOg.jpg "img3")
