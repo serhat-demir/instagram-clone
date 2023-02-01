@@ -80,12 +80,10 @@ public class User implements Parcelable {
     public Boolean followerListContains(int user_id) {
         for (User u : followers) {
             if (u.user_id == user_id) {
-                Log.e("true", "true");
                 return true;
             }
         }
 
-        Log.e("false", "false");
         return false;
     }
 
