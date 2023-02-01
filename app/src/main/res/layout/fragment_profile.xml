@@ -167,10 +167,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:onClick="@{() -> Session.followingListContains(user.user_id) ? profileFragment.unfollow(user.user_id) : profileFragment.follow(user)}"
+                        android:onClick="@{() -> user.followerListContains(Session.ACTIVE_USER.user_id) ? profileFragment.unfollow(user.user_id) : profileFragment.follow(user)}"
                         android:visibility="@{(user.user_id == Session.ACTIVE_USER.user_id) ? View.GONE : View.VISIBLE}"
-                        android:text="@{Session.followingListContains(user.user_id) ? @string/btn_following : @string/btn_follow}"
-                        android:backgroundTint="@{Session.followingListContains(user.user_id) ? @color/md_blue_800 : @color/md_blue_400}"
+                        android:text="@{user.followerListContains(Session.ACTIVE_USER.user_id) ? @string/btn_following : @string/btn_follow}"
+                        android:backgroundTint="@{user.followerListContains(Session.ACTIVE_USER.user_id) ? @color/md_blue_800 : @color/md_blue_400}"
                         style="@style/ButtonBlue" />
                 </LinearLayout>
 
@@ -191,7 +191,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/frgProfilerecyclerView"
+                        android:id="@+id/frgProfileRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:adapter="@{postAdapter}"

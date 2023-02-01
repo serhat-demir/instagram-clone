@@ -58,10 +58,10 @@ public class ProfileFragment extends Fragment {
             Picasso.get().load(ApiUtils.BASE_URL + getResources().getString(R.string.dir_profile_photos) + user.getUser_photo()).into(binding.frgProfileImgUserPhoto);
 
             if (user.getUser_profile_private() == 1 && !user.getUser_id().equals(Session.ACTIVE_USER.getUser_id())) {
-                binding.frgProfilerecyclerView.setVisibility(View.GONE);
+                binding.frgProfileRecyclerView.setVisibility(View.GONE);
                 binding.frgProfileLblMsgPrivate.setVisibility(View.VISIBLE);
             } else {
-                binding.frgProfilerecyclerView.setVisibility(View.VISIBLE);
+                binding.frgProfileRecyclerView.setVisibility(View.VISIBLE);
                 binding.frgProfileLblMsgPrivate.setVisibility(View.GONE);
             }
         });
@@ -71,7 +71,7 @@ public class ProfileFragment extends Fragment {
 
             PostAdapterProfile postAdapter = new PostAdapterProfile(requireContext(), posts);
             binding.setPostAdapter(postAdapter);
-            binding.frgProfilerecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
+            binding.frgProfileRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
         });
 
         viewModel.getUserDetailsById(user_id);
@@ -89,7 +89,6 @@ public class ProfileFragment extends Fragment {
         viewModel.follow(user.getUser_id());
 
         // update ui
-        Session.ACTIVE_USER.getFollowing().add(user);
         viewModel.getUserDetailsById(user.getUser_id());
     }
 
@@ -97,14 +96,6 @@ public class ProfileFragment extends Fragment {
         viewModel.unfollow(user_id);
 
         // update ui
-        Iterator<User> iter = Session.ACTIVE_USER.getFollowing().iterator();
-        while (iter.hasNext()) {
-            User u = iter.next();
-
-            if (u.getUser_id() == user_id) {
-                iter.remove();
-            }
-        }
         viewModel.getUserDetailsById(user_id);
     }
 

@@ -1,6 +1,5 @@
 package com.serhat.instagram.ui.view.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,22 +15,17 @@ import com.serhat.instagram.api.ApiUtils;
 import com.serhat.instagram.data.model.User;
 import com.serhat.instagram.databinding.CardUserBinding;
 import com.serhat.instagram.ui.view.fragment.FollowFragmentDirections;
-import com.serhat.instagram.ui.viewmodel.FollowViewModel;
-import com.serhat.instagram.localdb.Session;
 import com.squareup.picasso.Picasso;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class UserAdapterFollow extends RecyclerView.Adapter<UserAdapterFollow.UserViewHolder> {
     private Context context;
     private List<User> users;
-    private FollowViewModel viewModel;
 
-    public UserAdapterFollow(Context context, List<User> users, FollowViewModel viewModel) {
+    public UserAdapterFollow(Context context, List<User> users) {
         this.context = context;
         this.users = users;
-        this.viewModel = viewModel;
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -48,31 +42,6 @@ public class UserAdapterFollow extends RecyclerView.Adapter<UserAdapterFollow.Us
         followToProfile.setUserId(user_id);
 
         Navigation.findNavController(view).navigate(followToProfile);
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    public void follow(User user) {
-        viewModel.follow(user.getUser_id());
-
-        // update ui
-        Session.ACTIVE_USER.getFollowing().add(user);
-        notifyDataSetChanged();
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    public void unfollow(int user_id) {
-        viewModel.unfollow(user_id);
-
-        // update ui
-        Iterator<User> iter = Session.ACTIVE_USER.getFollowing().iterator();
-        while (iter.hasNext()) {
-            User u = iter.next();
-
-            if (u.getUser_id() == user_id) {
-                iter.remove();
-            }
-        }
-        notifyDataSetChanged();
     }
 
     @NonNull

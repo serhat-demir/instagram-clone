@@ -2,6 +2,7 @@ package com.serhat.instagram.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -75,6 +76,18 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    public Boolean followerListContains(int user_id) {
+        for (User u : followers) {
+            if (u.user_id == user_id) {
+                Log.e("true", "true");
+                return true;
+            }
+        }
+
+        Log.e("false", "false");
+        return false;
+    }
 
     public Integer getUser_id() {
         return user_id;
